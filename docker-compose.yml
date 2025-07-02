@@ -13,7 +13,7 @@ services:
       - postgre-hari-network
     command: >
       sh -c "
-        migrate -path pkg/database/migrations -database 'postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?sslmode=disable' up &&
+        migrate -path pkg/database/migrations -database 'postgres://$${DB_USER}:$${DB_PASSWORD}@$${DB_HOST}:$${DB_PORT}/$${DB_NAME}?sslmode=disable' up &&
         /main
       "
 

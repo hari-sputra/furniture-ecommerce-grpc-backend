@@ -5,7 +5,7 @@ services:
     container_name: furniture-golang-be # Sebaiknya beri nama unik
     restart: always
     env_file:
-      - ./prod.env # File ini berisi info koneksi ke DB
+      - .env # File ini berisi info koneksi ke DB
     ports:
       - "8003:8080"
     networks:

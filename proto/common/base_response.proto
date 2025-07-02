@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package common;
+
+option go_package = "github.com/hari-sputra/furniture-ecommerce-grpc-be/pb/common";
+
+import "google/protobuf/timestamp.proto";
+
+message ValidationError {
+    string field = 1;
+    string message = 2;
+}
+
+message BaseResponse {
+    int32 status_code = 1;
+    string message = 2;
+    bool is_error = 3;
+    repeated ValidationError validation_errors = 4;
+}
+
+message UserResponse {
+   string user_id = 1;
+   string full_name = 2;
+   string email = 3;
+   string role_code = 4;
+   google.protobuf.Timestamp member_since = 5;
+}

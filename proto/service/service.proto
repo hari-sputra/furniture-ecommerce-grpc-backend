@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package service;
+
+option go_package = "github.com/hari-sputra/furniture-ecommerce-grpc-be/pb/service";
+
+import "common/base_response.proto";
+import "buf/validate/validate.proto";
+
+service HelloWorldService {
+    rpc SayHello (HelloWorldRequest) returns (HelloWorldResponse);
+}
+
+message HelloWorldRequest {
+    string name = 1 [(buf.validate.field).string = {min_len: 3, max_len: 255}];
+}
+
+message HelloWorldResponse {
+    common.BaseResponse meta = 1;
+    string message = 2;
+}

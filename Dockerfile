@@ -18,10 +18,10 @@ RUN CGO_ENABLED=0 GOOS=linux go build -o /main .
 # --- Tahap Produksi ---
 FROM alpine:latest
 
-WORKDIR /
+WORKDIR /app
 
 # Salin hasil build dari tahap sebelumnya
-COPY --from=builder /main /main
+COPY --from=builder /app/main .
 
 # Port yang akan diekspos oleh aplikasi Go Anda
 EXPOSE 8003

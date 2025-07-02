@@ -13,12 +13,14 @@ RUN go mod download
 COPY . .
 
 # Build aplikasi Go
-RUN CGO_ENABLED=0 GOOS=linux go build -o /main .
+RUN CGO_ENABLED=0 GOOS=linux go build -o main .
 
 # --- Tahap Produksi ---
 FROM alpine:latest
 
 WORKDIR /app
+
+RUN apk --no-cache add ca-certificates
 
 # Salin hasil build dari tahap sebelumnya
 COPY --from=builder /app/main .

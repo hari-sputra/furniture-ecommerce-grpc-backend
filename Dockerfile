@@ -5,6 +5,8 @@ FROM golang:1.24-alpine AS builder
 
 WORKDIR /app
 
+RUN go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+
 # Salin file dependensi dan unduh
 COPY go.mod go.sum ./
 RUN go mod download

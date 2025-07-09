@@ -32,9 +32,12 @@ COPY --from=builder /app/main .
 COPY --from=builder /usr/local/bin/migrate .
 COPY --from=builder /app/pkg ./pkg
 
+COPY entrypoint.sh .
+RUN chmod +x ./entrypoint.sh
+
 # Port yang akan diekspos oleh aplikasi Go Anda
 EXPOSE 8080
 
 # Perintah untuk menjalankan aplikasi saat container dimulai
 # Variabel lingkungan akan disuntikkan oleh Docker Compose
-CMD ["/app/main"]
+CMD ["./entrypoint.sh"]

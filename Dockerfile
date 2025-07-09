@@ -30,6 +30,7 @@ RUN apk --no-cache add ca-certificates
 # Salin hasil build dari tahap sebelumnya
 COPY --from=builder /app/main .
 COPY --from=builder /usr/local/bin/migrate .
+COPY --from=builder /app/pkg ./pkg
 
 # Port yang akan diekspos oleh aplikasi Go Anda
 EXPOSE 8080

@@ -5,6 +5,11 @@ FROM golang:1.24-alpine AS builder
 
 WORKDIR /app
 
+# Install migrate tool
+RUN apk --no-cache add curl && \
+    curl -L https://github.com/golang-migrate/migrate/releases/download/v4.15.2/migrate.linux-amd64.tar.gz | tar xvz && \
+    mv migrate.linux-amd64 /usr/local/bin/migrate
+
 # Salin file dependensi dan unduh
 COPY go.mod go.sum ./
 RUN go mod download
@@ -13,7 +18,7 @@ RUN go mod download
 COPY . .
 
 # Build aplikasi Go
-RUN CGO_ENABLED=0 GOOS=linux go build -o main .
+RUN CGO_ENABLED=0 GOOS=linux go build -o main ./main.go
 
 # --- Tahap Produksi ---
 FROM alpine:latest
@@ -24,10 +29,11 @@ RUN apk --no-cache add ca-certificates
 
 # Salin hasil build dari tahap sebelumnya
 COPY --from=builder /app/main .
+COPY --from=builder /usr/local/bin/migrate .
 
 # Port yang akan diekspos oleh aplikasi Go Anda
-EXPOSE 8003
+EXPOSE 8080
 
 # Perintah untuk menjalankan aplikasi saat container dimulai
 # Variabel lingkungan akan disuntikkan oleh Docker Compose
-CMD ["/main"]
+CMD ["/app/main"]

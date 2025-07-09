@@ -25,7 +25,7 @@ FROM alpine:latest
 
 WORKDIR /app
 
-RUN apk --no-cache add ca-certificates
+RUN apk --no-cache add ca-certificates netcat-openbsd
 
 # Salin hasil build dari tahap sebelumnya
 COPY --from=builder /app/main .

@@ -8,7 +8,7 @@ WORKDIR /app
 # Install migrate tool
 RUN apk --no-cache add curl && \
     curl -L https://github.com/golang-migrate/migrate/releases/download/v4.18.3/migrate.linux-amd64.tar.gz | tar xvz && \
-    mv migrate.linux-amd64 /usr/local/bin/migrate
+    mv migrate /usr/local/bin/migrate
 
 # Salin file dependensi dan unduh
 COPY go.mod go.sum ./

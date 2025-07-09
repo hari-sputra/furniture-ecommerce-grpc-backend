@@ -6,7 +6,7 @@ services:
     env_file:
       - .env
     ports:
-      - "8081:8080"
+      - "8083:8080"
     networks:
       - postgre-hari-network
     command: >

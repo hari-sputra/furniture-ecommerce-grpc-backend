@@ -28,4 +28,5 @@ exec /app/grpcwebproxy \
   --backend_addr=localhost:50051 \
   --backend_tls=false \
   --run_tls_server=false \
-  --server_http_debug_port=8080
+  --server_http_debug_port=8080 \
+  --allow_all_origins

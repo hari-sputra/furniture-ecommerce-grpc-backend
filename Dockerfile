@@ -34,7 +34,7 @@ RUN apk --no-cache add ca-certificates netcat-openbsd
 # Salin hasil build dari tahap sebelumnya
 COPY --from=builder /app/main .
 COPY --from=builder /usr/local/bin/migrate .
-COPY --from=builder /home/day/go/bin/grpcwebproxy .
+COPY --from=builder /usr/local/bin/grpcwebproxy .
 COPY --from=builder /app/pkg ./pkg
 
 COPY entrypoint.sh .

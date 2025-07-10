@@ -10,11 +10,12 @@ RUN apk --no-cache add curl && \
     curl -L https://github.com/golang-migrate/migrate/releases/download/v4.18.3/migrate.linux-amd64.tar.gz | tar xvz && \
     mv migrate /usr/local/bin/migrate
 
-# Install grpcwebproxy tool (build from source for Alpine compatibility)
-RUN go install github.com/grpc/grpc-web/go/grpcwebproxy@latest
+# Install grpcwebproxy tool (build from source for Alpine compatibility
+RUN go install github.com/improbable-eng/grpc-web/go/grpcwebproxy@latest
 
 # Salin file dependensi dan unduh
 COPY go.mod go.sum ./
+
 RUN go mod download
 
 # Salin sisa kode sumber

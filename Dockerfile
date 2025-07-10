@@ -11,8 +11,8 @@ RUN apk --no-cache add curl && \
     mv migrate /usr/local/bin/migrate
 
 # Install grpcwebproxy tool
-RUN curl -L https://github.com/grpc/grpcweb/releases/download/1.5.0/grpcwebproxy-v1.5.0-linux-x86_64 | tar -xvz && \
-    mv grpcwebproxy /usr/local/bin/grpcwebproxy
+RUN curl -L -o /usr/local/bin/grpcwebproxy https://github.com/grpc/grpcweb/releases/download/1.5.0/grpcwebproxy-v1.5.0-linux-x86_64 && \
+    chmod +x /usr/local/bin/grpcwebproxy
 
 # Salin file dependensi dan unduh
 COPY go.mod go.sum ./

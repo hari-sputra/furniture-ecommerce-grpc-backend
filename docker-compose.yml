@@ -1,6 +1,8 @@
 services:
   my-app:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: furniture-golang-be
     restart: always
     env_file:

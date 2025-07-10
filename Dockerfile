@@ -33,7 +33,7 @@ COPY --from=builder /usr/local/bin/migrate .
 COPY --from=builder /app/pkg ./pkg
 
 COPY entrypoint.sh .
-RUN chmod +x ./entrypoint.sh
+RUN chmod +x /app/entrypoint.sh
 
 # Port yang akan diekspos oleh aplikasi Go Anda
 EXPOSE 8080

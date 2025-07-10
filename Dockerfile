@@ -10,6 +10,10 @@ RUN apk --no-cache add curl && \
     curl -L https://github.com/golang-migrate/migrate/releases/download/v4.18.3/migrate.linux-amd64.tar.gz | tar xvz && \
     mv migrate /usr/local/bin/migrate
 
+# Install grpcwebproxy tool
+RUN curl -L https://github.com/grpc/grpcweb/releases/download/1.5.0/grpcwebproxy-v1.5.0-linux-x86_64 | tar -xvz && \
+    mv grpcwebproxy /usr/local/bin/grpcwebproxy
+
 # Salin file dependensi dan unduh
 COPY go.mod go.sum ./
 RUN go mod download
@@ -30,6 +34,7 @@ RUN apk --no-cache add ca-certificates netcat-openbsd
 # Salin hasil build dari tahap sebelumnya
 COPY --from=builder /app/main .
 COPY --from=builder /usr/local/bin/migrate .
+COPY --from=builder /home/day/go/bin/grpcwebproxy .
 COPY --from=builder /app/pkg ./pkg
 
 COPY entrypoint.sh .

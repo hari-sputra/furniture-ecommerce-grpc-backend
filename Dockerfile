@@ -11,7 +11,7 @@ RUN apk --no-cache add curl && \
     mv migrate /usr/local/bin/migrate
 
 # Install grpcwebproxy tool (build from source for Alpine compatibility
-RUN go install github.com/improbable-eng/grpc-web/go/grpcwebproxy@latest
+RUN go build -o /app/grpcwebproxy github.com/improbable-eng/grpc-web/go/grpcwebproxy
 
 # Salin file dependensi dan unduh
 COPY go.mod go.sum ./
@@ -34,7 +34,7 @@ RUN apk --no-cache add ca-certificates netcat-openbsd
 # Salin hasil build dari tahap sebelumnya
 COPY --from=builder /app/main .
 COPY --from=builder /usr/local/bin/migrate .
-COPY --from=builder /usr/local/bin/grpcwebproxy .
+COPY --from=builder /app/grpcwebproxy .
 COPY --from=builder /app/pkg ./pkg
 
 COPY entrypoint.sh .

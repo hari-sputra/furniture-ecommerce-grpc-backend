@@ -15,6 +15,13 @@ echo "Database is ready."
 # Start the Go gRPC application in the background
 /app/main &
 
+# Wait for the Go gRPC application to be ready
+echo "Waiting for Go gRPC application..."
+while ! nc -z localhost 50051; do
+  sleep 1
+done
+echo "Go gRPC application is ready."
+
 # Start grpcwebproxy in the foreground
 # It will listen on 8080 and forward to the Go app on 50051
 exec /app/grpcwebproxy \
